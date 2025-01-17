@@ -17,3 +17,39 @@ Resources:
 - YouTube channel ids:
   - All channels have a unique id provided by YouTube. Example (Mr Beast): `UCX6OQ3DkcsbYNE6H8uQQuVA`
 
+----
+
+## Setup
+To get the API running on your machine, follow these steps:  
+1. Download the source code to local.   
+2. In the root of the project, run the command:  
+   ```bash  
+   docker compose up -d --build  
+   ```  
+   If port 80 is already in use on your machine, you can adjust the port settings directly in the `docker-compose.yml` file.
+
+---
+
+## Usage  
+
+### Endpoint  
+`GET /videos/{channel_id}`  
+
+- Replace `{channel_id}` with the YouTube channel's unique ID.  
+
+---  
+
+## How It Works  
+
+1. Checks DynamoDB for video metadata.  
+2. If not found, retrieves data from the Google Feed XML endpoint:  
+   `https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}`.  
+3. Stores the fetched metadata in DynamoDB with a 24-hour expiration.
+
+---
+
+## Notes  
+
+- Data stored in DynamoDB automatically expires after 24 hours to ensure relevance.  
+  
+
