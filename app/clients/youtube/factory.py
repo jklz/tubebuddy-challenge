@@ -49,8 +49,7 @@ def parse_xml_feed_video_entry(video_entry: ElementTree.Element):
             'views': int(statistics_element.attrib['views']),
             'star_rating': {
                 'count': int(star_rating_element.attrib['count']),
-                'average': star_rating_element.attrib['average'],
-                'average_dec': Decimal(star_rating_element.attrib['average']),
+                'average': Decimal(star_rating_element.attrib['average']),
                 'min': int(star_rating_element.attrib['min']),
                 'max': int(star_rating_element.attrib['max']),
             }
